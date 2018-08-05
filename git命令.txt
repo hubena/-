@@ -1,0 +1,44 @@
+1、输入git init初始化Git仓库。此时用ls -a查看当前目录，可以看到多了一个.git/的文件夹，
+    此文件夹保存了版本控制的所有相关信息。
+2、 输入echo "This is a simple practise" > readme.txt，创建一个readme.txt文件。
+3、输入git status查看当前版本库状态，在Untracked files(未跟踪文件)下，
+    会出现红色的readme.txt，代表此文件还未被Git所管理。
+4、使用git add readme.txt，将该文件加入缓冲区，如果你确定所有的修改都需要提交，
+    可以使用git add .来加入所有修改。现在用git status查看，将看到文件名变为绿色。
+5、使用git commit -m "This is my first commit via Git!"来提交修改，-m后面所带的参数
+    是本次提交信息，一般用来记录本次提交的主要意图。
+6、提交成功后，可以用git log查看历史提交记录。每个记录都会有提交id，作者和提交日期。
+7、你可以用git branch查看当前有哪些分支，当然，因为我们没有创建任何分支，
+    目前只会有一个master分支。
+8、使用git checkout -b feature创建一个名为feature的分支，再用git branch查看一下。
+9、在git bash中输入git clone https://github.com/feicui-android/Hello-World.git。
+    下载项目源码。以上链接为项目地址
+10、 查看版本历史
+    a、cd到项目文件夹下，使用git log能看到我们的历史提交记录。
+    b、要回到某一历史版本，可以使用git checkout commitId，看完后要回到最新代码，
+    使用git checkout master。
+11、 本地修改代码
+    a、下载新代码：git pull。
+    b、从master出捡出一个新的分支：git checkout -b feature。feature是分支名称，
+        你可以随意取名，但请用英文。
+    c、 在feature分支上随意修改，改完后你可以提交你的修改：git commit -m "some message"。
+    d、此时要同步代码，请先切回主分支：git checkout master，然后更新git pull。
+    e、如果想删除自己建立的分支，使用git branch -D feature，注意执行此命令后
+        分支被强制删除，无法恢复。
+
+12、查看 git 远程仓库地址配置命令
+    git remote -v
+
+13、要上传本地仓库更改
+    a、首先要做的就是把本地仓库传到github上去，在此之前还需要设置username和email，因为github每次commit都会记录他们
+        $ git config --global user.name "your name"
+        $ git config --global user.email "your_email@yo uremail.com"
+    b、进入要上传的仓库，右键git bash，添加远程地址：
+        git remote add origin git@github.com:yourName/yourRepo.git
+    c、若添加不成功，则需要先删除在添加，删除命令为：
+        $ git remote rm origin
+        $ git remote add origin git@github.com:someuser/newprojectname.git
+        或$ git remote set-url origin git@github.com:someuser/newprojectname.git
+
+    d、上传命令：git push origin master
+    
