@@ -1,0 +1,5 @@
+1、zkServer.cmd：启动zookeeper服务器命令。
+	C:\WINDOWS\system32>zkServer.cmd
+2、zkCli.cmd:启动客户端并连接到zookeeperfuwu服务器命令（2181为zoo.cfg中配置的客户端连接端口）：
+    C:\WINDOWS\system32>zkCli -server 127.0.0.1:2181
+3、zkEnv.cmd：此命令在以上两个命令中会用到，不用我们调用。
