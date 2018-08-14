@@ -41,4 +41,8 @@
         或$ git remote set-url origin git@github.com:someuser/newprojectname.git
 
     d、上传命令：git push origin master
-    
+14、拷贝网上项目到本地：
+    格式如下：
+    git clone 网上项目地址 本地磁盘地址
+    示例如下：
+    git clone https://github.com/dubbo/dubbo-ops.git /f/ProgramTools/eclipse-jee-photon-R-win32-x86_64/workspace3/dubbo-test

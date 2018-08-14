@@ -60,8 +60,86 @@
 #返回当前登录用户名及主机名：
 	-- select user(),corrent_user(),system_user(); -- 一般情况下这几个函数相同
     
+#15、测试mysql锁：
+/**
+	a、开两个窗口，打开两个session连接.
+    b、然后在两个窗口中设置为非自动提交：
+		set autocommit=false;默认为ON
+	c、查看autocommit属性语句如下：
+		show variables like 'autocommit';
+	d、然后在一个窗口中执行update语句，不提交，mysql中update、delete、insert自动上排他锁。
+    e、再在另外一个窗口中执行update语句发现卡住了，说明同一条数据被锁住了。
+    f、在第一个窗口中执行commit;发现第二个窗口可以执行了，说明排它锁被释放了。
+    g、mysql中手动加共享锁语句：
+		lock in share mode;
+	h、手动加排它锁语句：
+		for update;account
+		
+**/
+
+#16、测试mysql事物，隔离级别如下:
+/**
+二、事务的并发问题
+
+　　1、脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据
+
+　　2、不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。
+
+　　3、幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读。
+
+　　小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表
+
+ 
+
+三、MySQL事务隔离级别
+
+事务隔离级别					脏读	不可重复读	幻读
+读未提交（read-uncommitted）	是		是			是
+不可重复读（read-committed）	否		是			是
+可重复读（repeatable-read）		否		否			是
+串行化（serializable）			否		否			否
 
 
+
+
+
+
+
+a、查看事物级别语句：
+mysql> select @@tx_isolation;
++-----------------+
+| @@tx_isolation  |
++-----------------+
+| REPEATABLE-READ |
++-----------------+
+
+b、设值隔离级别语句：以下设置为读未提交即脏读
+mysql> set session transaction isolation level read uncommitted;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select @@tx_isolation;
++------------------+
+| @@tx_isolation   |
++------------------+
+| READ-UNCOMMITTED |
++------------------+
+1 row in set, 1 warning (0.00 sec)
+c、开始事物语句：
+start transaction;
+c、提交事务语句：
+commit;
+
+d、还有一种开始与结束事物的语句begin与commit，但是要设置数据库为非自动提交：
+mysql> begin;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update account set balance = balance-50 where id=2;
+Query OK, 1 row affected (0.27 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> commit;
+Query OK, 0 rows affected (0.31 sec)
+**/
 
 
 

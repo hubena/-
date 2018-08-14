@@ -18,3 +18,7 @@ create table carcolour (
 );
 
 show create table test3.carcolour;
+
+select version();
+
+select * from test1.order

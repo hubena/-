@@ -1,0 +1,15 @@
+1、mstsc：
+    a、远程桌面连接命令
+2、notepad：
+    a、打开记事本
+3、explorer loglogback.log
+    a、打开文件，如上面的loglogback.log文件
+4、touch 33.text
+    a、创建文件33.text
+5、cat 文件名
+    a、查看文件
+6、vim 文件名
+    a、编辑文件
+
+
+
