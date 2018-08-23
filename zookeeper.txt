@@ -3,3 +3,63 @@
 2、zkCli.cmd:启动客户端并连接到zookeeperfuwu服务器命令（2181为zoo.cfg中配置的客户端连接端口）：
     C:\WINDOWS\system32>zkCli -server 127.0.0.1:2181
 3、zkEnv.cmd：此命令在以上两个命令中会用到，不用我们调用。
+
+4、ls /
+    a、查看节点目录，如下：有[dubbo, zookeeper]两个节点。
+        zk: localhost:2181(CONNECTED) 13] ls /
+
+5、create /zk_test my_data
+    a、这将创建一个新的znode，并将字符串“my_data”与节点相关联，如下：
+    [zk: localhost:2181(CONNECTED) 14] create /zk_test my_test_data
+    Created /zk_test
+    [zk: localhost:2181(CONNECTED) 15] ls /
+    [dubbo, zookeeper, zk_test]
+6、get /zk_test
+    a、通过运行get命令验证数据是否与znode相关联：
+    [zk: localhost:2181(CONNECTED) 23] get /zk_test
+    my_test_data
+    cZxid = 0x97
+    ctime = Tue Aug 14 23:30:22 GMT+08:00 2018
+    mZxid = 0x97
+    mtime = Tue Aug 14 23:30:22 GMT+08:00 2018
+    pZxid = 0x97
+    cversion = 0
+    dataVersion = 0
+    aclVersion = 0
+    ephemeralOwner = 0x0
+    dataLength = 12
+    numChildren = 0
+7、set /zk_test set_data_test
+    a、我们可以通过发出set命令来更改与zk_test相关的数据：
+    [zk: localhost:2181(CONNECTED) 25] set /zk_test set_data_test
+    cZxid = 0x97
+    ctime = Tue Aug 14 23:30:22 GMT+08:00 2018
+    mZxid = 0x98
+    mtime = Tue Aug 14 23:40:40 GMT+08:00 2018
+    pZxid = 0x97
+    cversion = 0
+    dataVersion = 1
+    aclVersion = 0
+    ephemeralOwner = 0x0
+    dataLength = 13
+    numChildren = 0
+    [zk: localhost:2181(CONNECTED) 26] get /zk_test
+    set_data_test
+    cZxid = 0x97
+    ctime = Tue Aug 14 23:30:22 GMT+08:00 2018
+    mZxid = 0x98
+    mtime = Tue Aug 14 23:40:40 GMT+08:00 2018
+    pZxid = 0x97
+    cversion = 0
+    dataVersion = 1
+    aclVersion = 0
+    ephemeralOwner = 0x0
+    dataLength = 13
+    numChildren = 0
+8、delete /zk_test
+    a、删除节点：
+    [zk: localhost:2181(CONNECTED) 27] delete /zk_test
+    [zk: localhost:2181(CONNECTED) 28] ls /
+    [dubbo, zookeeper]
+
+        
